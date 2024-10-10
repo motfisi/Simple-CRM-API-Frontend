@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+  .initial {
+    &__sides {
+      flex-direction: column;
+
+      &__clients,
+      &__tasks {
+        flex: none;
+        width: 100%;
+        height: 50vh;
+      }
+
+      &__clients:hover,
+      &__tasks:hover {
+        flex: none;
+      }
+    }
+  }
+}

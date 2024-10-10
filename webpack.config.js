@@ -13,6 +13,7 @@ module.exports = (env) => {
       static: './dist',
       port: 9000,
       open: true,
+      historyApiFallback: true,
     },
     module: {
       rules: [
@@ -35,7 +36,16 @@ module.exports = (env) => {
       }),
     ],
     resolve: {
-      extensions: ['.js', '.jsx'],
+      alias: {
+        '@src': path.resolve(__dirname, 'src'),
+        '@api': path.resolve(__dirname, 'src', 'api'),
+        '@components': path.resolve(__dirname, 'src', 'components'),
+        '@constants': path.resolve(__dirname, 'src', 'constants'),
+        '@sass': path.resolve(__dirname, 'src', 'sass'),
+        '@modules': path.resolve(__dirname, 'src', 'modules'),
+        '@node_modules': path.resolve(__dirname, 'node_modules'),
+      },
+      extensions: ['', '.js', '.jsx'],
     },
   };
 };
