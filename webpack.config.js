@@ -10,6 +10,7 @@ module.exports = (env) => {
       publicPath: '/',
       clean: true,
     },
+    devtool: env.production ? false : 'source-map',
     devServer: {
       static: './dist',
       port: 9000,
