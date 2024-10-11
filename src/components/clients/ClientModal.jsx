@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MODAL_TYPE } from '@constants';
 import ClientNameInput from '@modules/clients/ClientNameInput';
 import ClientEmailInput from '@modules/clients/ClientEmailInput';
@@ -6,10 +6,33 @@ import ClientPhoneInput from '@modules/clients/ClientPhoneInput';
 import { Button, Form, message, Modal, Space } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
 
-function ClientModal({ isOpen, onOk, onCancel, type }) {
+function ClientModal({
+  isOpen,
+  onOk,
+  onCancel,
+  type,
+  onClientsChange,
+  clientData,
+}) {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const onFinish = async () => {};
+
+  useEffect(() => {
+    if (type === MODAL_TYPE.EDIT) {
+      form.setFieldsValue({
+        client_name: clientData?.name,
+        client_email: clientData?.email,
+        client_phone: clientData?.phone,
+      });
+    }
+  }, [isOpen, clientData]);
+
+  const onFinish = async () => {
+    if (type === MODAL_TYPE.ADD) {
+    } else if (type === MODAL_TYPE.EDIT) {
+    }
+    onClientsChange();
+  };
 
   const onFinishFailed = () => {
     message.error('Проверьте поля для ввода!');
