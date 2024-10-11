@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Typography, Skeleton, Breadcrumb, Row, Col } from 'antd';
+import { Typography, Skeleton, Breadcrumb } from 'antd';
 import { ROUTES } from '@constants';
-import client from '@src/assets/img/client.png';
+import { getStatus } from '@utils';
 
 import './sass/index.scss';
 
@@ -21,12 +21,12 @@ function ClientInfo() {
   const { taskID } = useParams();
 
   const taskData = {
-    key: 1,
-    title: 'Asdsad',
-    email: 'sadas',
-    phone: '+375 (29) 624-53-80',
-    created_at: '12.12.2012',
-    updated_at: '12.12.2012',
+    id: 1,
+    user_name: 'Aasd',
+    user_id: 1,
+    title: 'sadas',
+    description: 'sdbfasdfsadfas',
+    status: 'pending',
   };
 
   const items = [
@@ -52,7 +52,14 @@ function ClientInfo() {
         />
       ) : (
         <>
-          <Typography.Title level={4}>Имя: {taskData.title}</Typography.Title>
+          <Typography.Title level={4}>Задача:</Typography.Title>
+          <Typography.Text>{taskData.title}</Typography.Text>
+          <Typography.Title level={4}>Описание:</Typography.Title>
+          <Typography.Text>{taskData.description}</Typography.Text>
+          <Typography.Title level={4}>Клиент:</Typography.Title>
+          <Typography.Text>{taskData.user_name}</Typography.Text>
+          <Typography.Title level={4}>Статус:</Typography.Title>
+          <Typography.Text>{getStatus(taskData.status)}</Typography.Text>
         </>
       )}
     </>
