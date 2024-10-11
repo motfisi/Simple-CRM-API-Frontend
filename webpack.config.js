@@ -7,6 +7,7 @@ module.exports = (env) => {
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist'),
+      publicPath: '/',
       clean: true,
     },
     devServer: {
@@ -27,6 +28,13 @@ module.exports = (env) => {
         {
           test: /\.scss$/,
           use: ['style-loader', 'css-loader', 'sass-loader'],
+        },
+        {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
+          generator: {
+            filename: 'img/[name].[contenthash][ext]',
+          },
         },
       ],
     },

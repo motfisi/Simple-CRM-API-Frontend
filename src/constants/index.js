@@ -3,12 +3,13 @@ export const ROUTER_ROUTES = {
   FOOTER: '',
   CLIENTS: '/clients',
   TASKS: '/tasks',
+  CLIENT_INFO: ':clientID',
 };
 
 export const ROUTES = {
   ROOT: { TITLE: 'Главная', PATH: '/' },
   NOT_FOUND: { TITLE: '404', PATH: '*' },
-  CLIENTS: { TITLE: 'Клиенты', PATH: '/clients' },
+  CLIENTS: { TITLE: 'Управление клиентами', PATH: '/clients' },
   TASKS: { TITLE: 'Задачи', PATH: '/tasks' },
   CLIENT_INFO: {
     TITLE: 'Информация о клиенте',
