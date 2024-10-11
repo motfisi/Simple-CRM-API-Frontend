@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier": "prettier . --write",
     "start": "webpack serve --mode development",
-    "build": "webpack --mode development"
+    "build": "webpack --mode development && cp _redirects dist/"
   },
   "keywords": [],
   "author": "",
