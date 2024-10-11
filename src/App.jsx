@@ -6,12 +6,14 @@ import Clients from '@components/clients/Clients';
 import ClientInfo from '@components/clients/ClientInfo';
 import Tasks from '@components/tasks/Tasks';
 import TaskInfo from '@components/tasks/TaskInfo';
+import NotFound from '@components/notFound/NotFound';
 import Footer from '@components/footer/Footer';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path={ROUTER_ROUTES.NOT_FOUND} element={<NotFound />} />
         <Route path={ROUTER_ROUTES.ROOT}>
           <Route index element={<Initial />} />
           <Route path={ROUTER_ROUTES.FOOTER} element={<Footer />}>

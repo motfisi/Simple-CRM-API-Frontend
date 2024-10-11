@@ -1,4 +1,5 @@
 export const ROUTER_ROUTES = {
+  NOT_FOUND: '*',
   ROOT: '/',
   FOOTER: '',
   CLIENTS: '/clients',
