@@ -1,0 +1,27 @@
+.ant-table-wrapper {
+  margin-top: 14px;
+  .ant-table-thead > tr > th {
+    background-color: #5d7283;
+    color: #fff;
+  }
+  .ant-table-thead {
+    tr {
+      th {
+        &.ant-table-column-sort {
+          background-color: #5d7283;
+        }
+        &.ant-table-column-has-sorters {
+          &:hover {
+            background-color: #c3cbce;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .ant-table {
+    overflow: scroll;
+  }
+}

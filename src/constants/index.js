@@ -1,5 +1,6 @@
 export const ROUTER_ROUTES = {
   ROOT: '/',
+  FOOTER: '',
   CLIENTS: '/clients',
   TASKS: '/tasks',
 };
@@ -13,4 +14,17 @@ export const ROUTES = {
     TITLE: 'Информация о клиенте',
     PATH: (clientID) => `/clients/${clientID}`,
   },
+};
+
+export const TABLE_LOCALE = {
+  triggerDesc: 'Нажмите, чтобы сортировать по убыванию',
+  triggerAsc: 'Нажмите, чтобы сортировать по возрастанию',
+  cancelSort: 'Нажмите, чтобы отменить сортировку',
+  filterReset: 'Отменить',
+  filterConfirm: 'Ок',
+};
+
+export const MODAL_TYPE = {
+  ADD: 'add',
+  EDIT: 'edit',
 };

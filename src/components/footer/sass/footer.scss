@@ -1,0 +1,19 @@
+.footer {
+  width: 100%;
+  height: 84px;
+  background-color: #5d7283;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__text {
+    color: #c3cbce;
+
+    &__href {
+      color: #c3cbce;
+      text-decoration: underline;
+    }
+  }
+}

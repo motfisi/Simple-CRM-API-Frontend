@@ -1,0 +1,15 @@
+.ant-btn {
+  &-primary {
+    background: #5d7283;
+
+    &:not(:disabled):not(.ant-btn-disabled):hover {
+      background: #c3cbce;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .ant-btn {
+    margin-bottom: 14px;
+  }
+}
