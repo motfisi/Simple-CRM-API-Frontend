@@ -29,6 +29,7 @@ const description_column = {
   key: 'description',
   dataIndex: 'description',
 };
+
 const status_column = {
   title: 'Статус',
   key: 'status',
@@ -44,14 +45,18 @@ const created_column = {
   title: 'Создан',
   key: 'created_at',
   dataIndex: 'created_at',
-  sorter: (a, b) => new Date(a.created_at) - new Date(b.created_at),
+  sorter: (a, b) =>
+    Date.parse(a.created_at.split('.').reverse().join('-')) -
+    Date.parse(b.created_at.split('.').reverse().join('-')),
 };
 
 const updated_column = {
   title: 'Обновлён',
   key: 'updated_at',
   dataIndex: 'updated_at',
-  sorter: (a, b) => new Date(a.updated_at) - new Date(b.updated_at),
+  sorter: (a, b) =>
+    Date.parse(a.created_at.split('.').reverse().join('-')) -
+    Date.parse(b.created_at.split('.').reverse().join('-')),
 };
 
 function TasksTable({ tasksData, onTasksChange }) {

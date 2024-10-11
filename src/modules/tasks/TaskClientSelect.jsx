@@ -16,11 +16,15 @@ function TaskClientSelect({ name, selectedClient }) {
     const optionsList = [
       {
         value: 1,
-        label: 'ds',
+        label: 'Матвей',
       },
       {
         value: 2,
-        label: 'asddas',
+        label: 'Иван',
+      },
+      {
+        value: 2,
+        label: 'Петя',
       },
     ];
     setOptions(optionsList);

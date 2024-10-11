@@ -22,11 +22,9 @@ function ClientInfo() {
 
   const clientData = {
     key: 1,
-    name: 'Asdsad',
-    email: 'sadas',
-    phone: '+375 (29) 624-53-80',
-    created_at: '12.12.2012',
-    updated_at: '12.12.2012',
+    name: 'тут должна',
+    email: 'быть информация',
+    phone: 'о клиенте по id',
   };
 
   const items = [

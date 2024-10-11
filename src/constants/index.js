@@ -44,7 +44,7 @@ export const STATUSES = [
   {
     label: 'Выполняется',
     text: 'Выполняется',
-    value: 'in progress',
+    value: 'in_progress',
   },
   {
     label: 'Завершена',

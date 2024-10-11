@@ -22,10 +22,10 @@ function ClientInfo() {
 
   const taskData = {
     id: 1,
-    user_name: 'Aasd',
+    user_name: 'о задаче по id',
     user_id: 1,
-    title: 'sadas',
-    description: 'sdbfasdfsadfas',
+    title: 'тут должна',
+    description: 'быть информация',
     status: 'pending',
   };
 
