@@ -18,7 +18,7 @@ const clientsDataExample = [
   },
   {
     key: 2,
-    id: 1,
+    id: 2,
     name: 'fds',
     email: 'sadas',
     phone: '+375 (29) 624-53-80',

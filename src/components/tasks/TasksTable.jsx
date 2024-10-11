@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Button, Flex, Table, Tooltip } from 'antd';
+import { Button, Flex, Popconfirm, Table, Tooltip, message } from 'antd';
 import { TABLE_LOCALE, ROUTES, MODAL_TYPE, STATUSES } from '@constants';
 import { getStatus } from '@utils';
 import { useNavigate } from 'react-router-dom';
@@ -64,7 +64,13 @@ function TasksTable({ tasksData, onTasksChange }) {
     setIsTaskModalOpen(true);
   };
 
+  const onDeleteConfirm = (e, id) => {
+    e.stopPropagation();
+    deleteTask(id);
+  };
+
   const deleteTask = (id) => {
+    message.success(id);
     onTasksChange();
   };
 
@@ -91,14 +97,23 @@ function TasksTable({ tasksData, onTasksChange }) {
             />
           </Tooltip>
           <Tooltip title='Удалить'>
-            <Button
-              type='text'
-              icon={<DeleteOutlined />}
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteTask(record.id);
-              }}
-            />
+            <Popconfirm
+              title='Удаление задачи'
+              description='Вы уверены, что хотите удалить эту задачу?'
+              onConfirm={(e) => onDeleteConfirm(e, record.id)}
+              onCancel={(e) => e.stopPropagation()}
+              placement='leftTop'
+              okText='Да'
+              cancelText='Отмена'
+            >
+              <Button
+                type='text'
+                icon={<DeleteOutlined />}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              />
+            </Popconfirm>
           </Tooltip>
         </Flex>
       ),

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Button, Flex, Table, Tooltip } from 'antd';
+import { Button, Flex, Table, Tooltip, Popconfirm, message } from 'antd';
 import { TABLE_LOCALE, ROUTES, MODAL_TYPE } from '@constants';
 import { useNavigate } from 'react-router-dom';
 import ClientModal from '@src/components/clients/ClientModal';
@@ -53,6 +53,11 @@ function ClientsTable({ clientsData, onClientsChange }) {
     setIsClientModalOpen(true);
   };
 
+  const onDeleteConfirm = (e, id) => {
+    deleteClient(id);
+    e.stopPropagation();
+  };
+
   const deleteClient = (id) => {
     onClientsChange();
   };
@@ -79,14 +84,23 @@ function ClientsTable({ clientsData, onClientsChange }) {
             />
           </Tooltip>
           <Tooltip title='Удалить'>
-            <Button
-              type='text'
-              icon={<DeleteOutlined />}
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteClient(record.id);
-              }}
-            />
+            <Popconfirm
+              title='Удаление клиента'
+              description='Вы уверены, что хотите удалить этого клиента?'
+              onConfirm={(e) => onDeleteConfirm(e, record.id)}
+              onCancel={(e) => e.stopPropagation()}
+              placement='leftTop'
+              okText='Да'
+              cancelText='Отмена'
+            >
+              <Button
+                type='text'
+                icon={<DeleteOutlined />}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              />
+            </Popconfirm>
           </Tooltip>
         </Flex>
       ),
