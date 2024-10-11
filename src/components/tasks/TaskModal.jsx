@@ -25,8 +25,16 @@ function TaskModal({ isOpen, onOk, onCancel, type, onTasksChange, taskData }) {
   }, [isOpen, taskData]);
 
   const onFinish = async () => {
+    const body = {
+      title: form.getFieldValue('task_title'),
+      description: form.getFieldValue('task_description'),
+      client_id: form.getFieldValue('task_client'),
+      status: form.getFieldValue('task_status'),
+    };
+
     if (type === MODAL_TYPE.ADD) {
     } else if (type === MODAL_TYPE.EDIT) {
+      body.task_id = taskData.id;
     }
     onTasksChange();
   };

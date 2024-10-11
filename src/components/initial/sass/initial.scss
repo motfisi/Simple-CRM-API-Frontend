@@ -16,14 +16,62 @@
     }
 
     &__clients {
-      background-color: #c3cbce;
+      background: url('@assets/img/clients.jpg');
+      position: relative;
+      background-size: auto;
+      background-position: center;
       font-size: 32px;
       color: #29333c !important;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        transition: background-color 0.4s ease;
+        z-index: 1;
+      }
+
+      * {
+        position: relative;
+        z-index: 2;
+      }
+
+      &:hover::before {
+        background-color: rgba(0, 0, 0, 0);
+      }
     }
 
     &__tasks {
-      background-color: #5d7283;
+      background: url('@assets/img/tasks.jpg');
+      position: relative;
+      background-size: auto;
+      background-position: center;
       color: #c3cbce;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        transition: background-color 0.4s ease;
+        z-index: 1;
+      }
+
+      * {
+        position: relative;
+        z-index: 2;
+      }
+
+      &:hover::before {
+        background-color: rgba(0, 0, 0, 0);
+      }
     }
 
     &__clients:hover {
@@ -38,12 +86,14 @@
   }
 
   &__typography-text-clients {
-    color: #29333c;
-    font-size: clamp(24px, 3vw, 48px);
+    color: #fff;
+    font-size: clamp(24px, 4vw, 64px);
+    text-shadow: 5px 5px 8px rgba(0, 0, 0, 1);
   }
 
   &__typography-text-tasks {
-    color: #c3cbce;
-    font-size: clamp(24px, 5vw, 48px);
+    color: #fff;
+    font-size: clamp(24px, 4vw, 64px);
+    text-shadow: 5px 5px 8px rgba(0, 0, 0, 1);
   }
 }

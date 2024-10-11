@@ -28,8 +28,15 @@ function ClientModal({
   }, [isOpen, clientData]);
 
   const onFinish = async () => {
+    const body = {
+      name: form.getFieldValue('client_name'),
+      email: form.getFieldValue('client_email'),
+      phone: form.getFieldValue('client_phone'),
+    };
+
     if (type === MODAL_TYPE.ADD) {
     } else if (type === MODAL_TYPE.EDIT) {
+      body.id = clientData.id;
     }
     onClientsChange();
   };

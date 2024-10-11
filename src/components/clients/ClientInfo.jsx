@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Typography, Skeleton, Breadcrumb, Row, Col } from 'antd';
 import { ROUTES } from '@constants';
-import client from '@src/assets/img/client.png';
+import client from '@assets/img/client.png';
 
 import './sass/index.scss';
 
@@ -17,6 +18,7 @@ const clientsPage = {
 
 function ClientInfo() {
   const [isLoading, setIsLoading] = useState(false);
+  const { clientID } = useParams();
 
   const clientData = {
     key: 1,

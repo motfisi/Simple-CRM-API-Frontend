@@ -49,12 +49,13 @@ module.exports = (env) => {
         '@api': path.resolve(__dirname, 'src', 'api'),
         '@components': path.resolve(__dirname, 'src', 'components'),
         '@utils': path.resolve(__dirname, 'src', 'utils'),
+        '@assets': path.resolve(__dirname, 'src/assets'),
         '@constants': path.resolve(__dirname, 'src', 'constants'),
         '@sass': path.resolve(__dirname, 'src', 'sass'),
         '@modules': path.resolve(__dirname, 'src', 'modules'),
         '@node_modules': path.resolve(__dirname, 'node_modules'),
       },
-      extensions: ['', '.js', '.jsx'],
+      extensions: ['', '.js', '.jsx', '.scss'],
     },
   };
 };

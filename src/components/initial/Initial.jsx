@@ -23,12 +23,12 @@ function Initial() {
         onClick={handleNavigateToClients}
       >
         <Typography.Text className='initial__typography-text-clients'>
-          Клиенты
+          КЛИЕНТЫ
         </Typography.Text>
       </div>
       <div className='initial__sides__tasks' onClick={handleNavigateToTasks}>
         <Typography.Text className='initial__typography-text-tasks'>
-          Задачи
+          ЗАДАЧИ
         </Typography.Text>
       </div>
     </div>

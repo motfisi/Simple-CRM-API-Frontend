@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Typography, Skeleton, Breadcrumb, Row, Col } from 'antd';
 import { ROUTES } from '@constants';
 import client from '@src/assets/img/client.png';
@@ -11,16 +12,17 @@ const mainPage = {
 };
 
 const clientsPage = {
-  title: ROUTES.CLIENTS.TITLE,
-  href: ROUTES.CLIENTS.PATH,
+  title: ROUTES.TASKS.TITLE,
+  href: ROUTES.TASKS.PATH,
 };
 
 function ClientInfo() {
   const [isLoading, setIsLoading] = useState(false);
+  const { taskID } = useParams();
 
-  const clientData = {
+  const taskData = {
     key: 1,
-    name: 'Asdsad',
+    title: 'Asdsad',
     email: 'sadas',
     phone: '+375 (29) 624-53-80',
     created_at: '12.12.2012',
@@ -31,13 +33,13 @@ function ClientInfo() {
     mainPage,
     clientsPage,
     {
-      title: clientData.name,
+      title: taskData.title,
     },
   ];
 
   return (
     <>
-      <Typography.Title level={2}>Информация о клиенте</Typography.Title>
+      <Typography.Title level={2}>Информация о задаче</Typography.Title>
       <Breadcrumb items={items} />
 
       {isLoading ? (
@@ -49,30 +51,9 @@ function ClientInfo() {
           }}
         />
       ) : (
-        <Row align='middle'>
-          <Col
-            lg={6}
-            xl={6}
-            xxl={6}
-            xs={24}
-            sm={24}
-            md={12}
-            className='clients__client-info__img-container'
-          >
-            <img src={client} className='clients__client-info__img' />
-          </Col>
-          <Col lg={18} xl={18} xxl={18} xs={24} sm={24} md={12}>
-            <Typography.Title level={4}>
-              Имя: {clientData.name}
-            </Typography.Title>
-            <Typography.Title level={4}>
-              Email: {clientData.email}
-            </Typography.Title>
-            <Typography.Title level={4}>
-              Телефон: {clientData.phone}
-            </Typography.Title>
-          </Col>
-        </Row>
+        <>
+          <Typography.Title level={4}>Имя: {taskData.title}</Typography.Title>
+        </>
       )}
     </>
   );

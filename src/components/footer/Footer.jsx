@@ -24,7 +24,6 @@ function Footer() {
               zhur4k
             </Typography.Text>
           </a>
-          <br />© All rights are reserved.
         </Typography.Text>
       </div>
     </>

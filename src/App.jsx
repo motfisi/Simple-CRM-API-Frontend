@@ -5,6 +5,7 @@ import Initial from '@components/initial/Initial';
 import Clients from '@components/clients/Clients';
 import ClientInfo from '@components/clients/ClientInfo';
 import Tasks from '@components/tasks/Tasks';
+import TaskInfo from '@components/tasks/TaskInfo';
 import Footer from '@components/footer/Footer';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             </Route>
             <Route path={ROUTER_ROUTES.TASKS}>
               <Route index element={<Tasks />} />
+              <Route path={ROUTER_ROUTES.TASK_INFO} element={<TaskInfo />} />
             </Route>
           </Route>
         </Route>
