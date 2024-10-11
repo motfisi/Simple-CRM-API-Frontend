@@ -4,6 +4,7 @@ import { ROUTER_ROUTES } from '@constants';
 import Initial from '@components/initial/Initial';
 import Clients from '@components/clients/Clients';
 import ClientInfo from '@components/clients/ClientInfo';
+import Tasks from '@components/tasks/Tasks';
 import Footer from '@components/footer/Footer';
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
                 path={ROUTER_ROUTES.CLIENT_INFO}
                 element={<ClientInfo />}
               />
+            </Route>
+            <Route path={ROUTER_ROUTES.TASKS}>
+              <Route index element={<Tasks />} />
             </Route>
           </Route>
         </Route>

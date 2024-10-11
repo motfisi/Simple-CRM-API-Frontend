@@ -26,11 +26,8 @@ function Initial() {
           Клиенты
         </Typography.Text>
       </div>
-      <div className='initial__sides__tasks'>
-        <Typography.Text
-          className='initial__typography-text-tasks'
-          onClick={handleNavigateToTasks}
-        >
+      <div className='initial__sides__tasks' onClick={handleNavigateToTasks}>
+        <Typography.Text className='initial__typography-text-tasks'>
           Задачи
         </Typography.Text>
       </div>
