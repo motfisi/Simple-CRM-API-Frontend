@@ -11,10 +11,10 @@ const client_column = {
   key: 'user_name',
   dataIndex: 'user_name',
   sorter: (a, b) => {
-    const firstFullName = a.name;
-    const secondFullName = b.name;
+    const firstName = a.user_name;
+    const secondName = b.user_name;
 
-    return firstFullName.localeCompare(secondFullName);
+    return firstName.localeCompare(secondName);
   },
 };
 
@@ -22,6 +22,12 @@ const task_column = {
   title: 'Задача',
   key: 'title',
   dataIndex: 'title',
+  sorter: (a, b) => {
+    const firstTask = a.title;
+    const secondTask = b.title;
+
+    return firstTask.localeCompare(secondTask);
+  },
 };
 
 const description_column = {

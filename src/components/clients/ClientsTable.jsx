@@ -10,10 +10,10 @@ const client_column = {
   key: 'name',
   dataIndex: 'name',
   sorter: (a, b) => {
-    const firstFullName = a.name;
-    const secondFullName = b.name;
+    const firstName = a.name;
+    const secondName = b.name;
 
-    return firstFullName.localeCompare(secondFullName);
+    return firstName.localeCompare(secondName);
   },
 };
 
