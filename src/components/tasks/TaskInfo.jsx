@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Typography, Skeleton, Breadcrumb } from 'antd';
+import { Typography, Skeleton, Breadcrumb, message } from 'antd';
 import { ROUTES } from '@constants';
 import { getStatus } from '@utils';
+import { tasksApi } from '@api';
 
 import './sass/index.scss';
 
@@ -17,7 +18,7 @@ const clientsPage = {
 };
 
 function ClientInfo() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { taskID } = useParams();
 
   const taskData = {
@@ -28,6 +29,22 @@ function ClientInfo() {
     description: 'быть информация',
     status: 'pending',
   };
+
+  const getTask = async () => {
+    try {
+      const body = {
+        task_id: taskID,
+      };
+      await tasksApi.getTaskById(body).then((data) => {});
+      setIsLoading(false);
+    } catch {
+      message.error('Невозможно получить данные');
+    }
+  };
+
+  useEffect(() => {
+    getTask();
+  }, [taskID]);
 
   const items = [
     mainPage,

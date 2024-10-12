@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.jsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prettier": "prettier . --write",
-    "start": "webpack serve --mode development",
-    "build": "webpack --mode production && cp _redirects dist/"
+    "start": "webpack serve",
+    "build:dev": "webpack --env mode=development",
+    "build:prod": "webpack --env mode=production && cp _redirects dist/"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   "dependencies": {
     "antd": "^5.21.3",
     "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-input-mask": "^2.0.4",

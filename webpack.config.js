@@ -1,8 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+require('dotenv').config();
 
 module.exports = (env) => {
   return {
+    mode: env.mode ?? 'development',
     entry: './src/index.jsx',
     output: {
       filename: 'bundle.js',
@@ -42,6 +45,9 @@ module.exports = (env) => {
       new HtmlWebpackPlugin({
         template: './src/index.html',
         favicon: './src/favicon.ico',
+      }),
+      new webpack.DefinePlugin({
+        API_PATH: JSON.stringify(process.env.API_PATH),
       }),
     ],
     resolve: {

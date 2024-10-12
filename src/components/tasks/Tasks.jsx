@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Skeleton, Breadcrumb, Row, Col, Button } from 'antd';
+import {
+  Typography,
+  Skeleton,
+  Breadcrumb,
+  Row,
+  Col,
+  Button,
+  message,
+} from 'antd';
 import TasksTable from '@src/components/tasks/TasksTable';
 import TaskModal from '@src/components/tasks/TaskModal';
 import { ROUTES, MODAL_TYPE } from '@constants';
+import { tasksApi } from '@api';
 
 import './sass/index.scss';
 
@@ -54,14 +63,21 @@ const items = [
 
 function Tasks() {
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [tasksData, setTasksData] = useState([]);
 
   useEffect(() => {
     getTasks();
   }, [tasksDataExample]);
 
-  const getTasks = () => {
+  const getTasks = async () => {
+    try {
+      await tasksApi.getTasks().then((data) => {});
+    } catch {
+      message.error('Невозможно получить данные');
+    } finally {
+      setIsLoading(false);
+    }
     setTasksData(tasksDataExample);
   };
 

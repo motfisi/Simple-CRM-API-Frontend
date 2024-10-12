@@ -9,27 +9,7 @@ const rules = [
   },
 ];
 
-function TaskClientSelect({ name, selectedClient }) {
-  const [options, setOptions] = useState([]);
-
-  useEffect(() => {
-    const optionsList = [
-      {
-        value: 1,
-        label: 'Матвей',
-      },
-      {
-        value: 2,
-        label: 'Иван',
-      },
-      {
-        value: 2,
-        label: 'Петя',
-      },
-    ];
-    setOptions(optionsList);
-  }, [selectedClient]);
-
+function TaskClientSelect({ name, options }) {
   return (
     <>
       <Typography.Text>Клиент</Typography.Text>

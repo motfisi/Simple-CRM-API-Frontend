@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Typography, Skeleton, Breadcrumb, Row, Col } from 'antd';
+import { Typography, Skeleton, Breadcrumb, Row, Col, message } from 'antd';
 import { ROUTES } from '@constants';
 import client from '@assets/img/client.png';
+import { clientsApi } from '@api';
 
 import './sass/index.scss';
 
@@ -17,7 +18,7 @@ const clientsPage = {
 };
 
 function ClientInfo() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const { clientID } = useParams();
 
   const clientData = {
@@ -26,6 +27,22 @@ function ClientInfo() {
     email: 'быть информация',
     phone: 'о клиенте по id',
   };
+
+  const getClient = async () => {
+    try {
+      const body = {
+        client_id: clientID,
+      };
+      await clientsApi.getClientById(body).then((data) => {});
+      setIsLoading(false);
+    } catch {
+      message.error('Невозможно получить данные');
+    }
+  };
+
+  useEffect(() => {
+    getClient();
+  }, [clientID]);
 
   const items = [
     mainPage,

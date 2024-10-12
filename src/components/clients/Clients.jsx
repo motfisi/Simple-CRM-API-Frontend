@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Skeleton, Breadcrumb, Row, Col, Button } from 'antd';
+import {
+  Typography,
+  Skeleton,
+  Breadcrumb,
+  Row,
+  Col,
+  Button,
+  message,
+} from 'antd';
 import ClientsTable from '@src/components/clients/ClientsTable';
 import ClientModal from '@src/components/clients/ClientModal';
 import { ROUTES, MODAL_TYPE } from '@constants';
+import { clientsApi } from '@api';
 
 import './sass/index.scss';
 
@@ -120,14 +129,22 @@ const items = [
 
 function Clients() {
   const [isClientModalOpen, setIsClientModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [clientsData, setClientsData] = useState([]);
 
   useEffect(() => {
     getClients();
-  }, [clientsDataExample]);
+    console.log(API_PATH);
+  }, []);
 
-  const getClients = () => {
+  const getClients = async () => {
+    try {
+      await clientsApi.getClients().then((data) => {});
+    } catch {
+      message.error('Невозможно получить данные');
+    } finally {
+      setIsLoading(false);
+    }
     setClientsData(clientsDataExample);
   };
 

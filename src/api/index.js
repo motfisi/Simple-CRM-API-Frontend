@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-export * from './data';
+export * from './clients';
+export * from './tasks';
 
 export const instance = axios.create({
   baseURL: API_PATH,

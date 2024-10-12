@@ -5,6 +5,7 @@ import ClientEmailInput from '@modules/clients/ClientEmailInput';
 import ClientPhoneInput from '@modules/clients/ClientPhoneInput';
 import { Button, Form, message, Modal, Space } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
+import { clientsApi } from '@api';
 
 function ClientModal({
   isOpen,
@@ -18,7 +19,7 @@ function ClientModal({
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (type === MODAL_TYPE.EDIT) {
+    if (type === MODAL_TYPE.EDIT && isOpen) {
       form.setFieldsValue({
         client_name: clientData?.name,
         client_email: clientData?.email,
@@ -28,17 +29,28 @@ function ClientModal({
   }, [isOpen, clientData]);
 
   const onFinish = async () => {
+    setIsLoading(true);
     const body = {
       name: form.getFieldValue('client_name'),
       email: form.getFieldValue('client_email'),
       phone: form.getFieldValue('client_phone'),
     };
 
-    if (type === MODAL_TYPE.ADD) {
-    } else if (type === MODAL_TYPE.EDIT) {
-      body.id = clientData.id;
+    try {
+      if (type === MODAL_TYPE.ADD) {
+        await clientsApi.addClient(body);
+      } else if (type === MODAL_TYPE.EDIT) {
+        body.client_id = clientData.id;
+        await clientsApi.addClient(body);
+      }
+
+      onClientsChange();
+      onOk();
+    } catch {
+      message.error('Произошла ошибка');
+    } finally {
+      setIsLoading(false);
     }
-    onClientsChange();
   };
 
   const onFinishFailed = () => {
