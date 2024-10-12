@@ -49,9 +49,11 @@ function TaskModal({ isOpen, onOk, onCancel, type, onTasksChange, taskData }) {
     try {
       if (type === MODAL_TYPE.ADD) {
         await tasksApi.addTask(body);
+        message.success('Задача успешно добавлена');
       } else if (type === MODAL_TYPE.EDIT) {
         body.task_id = taskData.id;
-        await tasksApi.addTask(body);
+        await tasksApi.changeTask(body);
+        message.success('Задача успешно изменена');
       }
 
       onTasksChange();
