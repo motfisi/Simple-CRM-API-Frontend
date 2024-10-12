@@ -134,7 +134,6 @@ function Clients() {
 
   useEffect(() => {
     getClients();
-    console.log(API_PATH);
   }, []);
 
   const getClients = async () => {
