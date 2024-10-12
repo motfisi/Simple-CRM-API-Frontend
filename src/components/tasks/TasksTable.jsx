@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, MessageFilled } from '@ant-design/icons';
 import { Button, Flex, Popconfirm, Table, Tooltip, message } from 'antd';
 import { TABLE_LOCALE, ROUTES, MODAL_TYPE, STATUSES } from '@constants';
 import { getStatus } from '@utils';
 import { useNavigate } from 'react-router-dom';
 import TaskModal from '@src/components/tasks/TaskModal';
+import { tasksApi } from '@api';
 
 const client_column = {
   title: 'Клиент',
@@ -80,8 +81,16 @@ function TasksTable({ tasksData, onTasksChange }) {
     deleteTask(id);
   };
 
-  const deleteTask = (id) => {
-    message.success(id);
+  const deleteTask = async (id) => {
+    const body = {
+      task_id: id,
+    };
+    try {
+      tasksApi.deleteTask(body);
+      message.success('Задача успешно удалена');
+    } catch {
+      message.error('Не удалось удалить задачу');
+    }
     onTasksChange();
   };
 

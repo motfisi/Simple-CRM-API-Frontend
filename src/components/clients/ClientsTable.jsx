@@ -4,6 +4,7 @@ import { Button, Flex, Table, Tooltip, Popconfirm, message } from 'antd';
 import { TABLE_LOCALE, ROUTES, MODAL_TYPE } from '@constants';
 import { useNavigate } from 'react-router-dom';
 import ClientModal from '@src/components/clients/ClientModal';
+import { clientsApi } from '@api';
 
 const client_column = {
   title: 'Клиент',
@@ -63,6 +64,15 @@ function ClientsTable({ clientsData, onClientsChange }) {
   };
 
   const deleteClient = (id) => {
+    const body = {
+      client_id: id,
+    };
+    try {
+      clientsApi.deleteClient(body);
+      message.success('Клиент успешно удалён');
+    } catch {
+      message.error('Не удалось удалить клиента');
+    }
     onClientsChange();
   };
 
