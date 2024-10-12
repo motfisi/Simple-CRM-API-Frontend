@@ -63,12 +63,12 @@ function ClientsTable({ clientsData, onClientsChange }) {
     e.stopPropagation();
   };
 
-  const deleteClient = (id) => {
+  const deleteClient = async (id) => {
     const body = {
       client_id: id,
     };
     try {
-      clientsApi.deleteClient(body);
+      await clientsApi.deleteClient(body);
       message.success('Клиент успешно удалён');
     } catch {
       message.error('Не удалось удалить клиента');

@@ -86,7 +86,7 @@ function TasksTable({ tasksData, onTasksChange }) {
       task_id: id,
     };
     try {
-      tasksApi.deleteTask(body);
+      await tasksApi.deleteTask(body);
       message.success('Задача успешно удалена');
     } catch {
       message.error('Не удалось удалить задачу');
