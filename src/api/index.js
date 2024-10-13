@@ -8,6 +8,7 @@ export const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     Accept: 'application/json',
+    'ngrok-skip-browser-warning': 'true',
   },
   credentials: 'include',
 });
