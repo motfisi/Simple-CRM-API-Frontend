@@ -54,7 +54,11 @@ const created_column = {
   key: 'createdAt',
   dataIndex: 'createdAt',
   render: (date) => changeDateFormat(date),
-  sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+  sorter: (a, b) => {
+    const dateA = new Date(Date.UTC(...a.createdAt));
+    const dateB = new Date(Date.UTC(...b.createdAt));
+    return dateA - dateB;
+  },
 };
 
 const updated_column = {
@@ -62,7 +66,11 @@ const updated_column = {
   key: 'updatedAt',
   dataIndex: 'updatedAt',
   render: (date) => changeDateFormat(date),
-  sorter: (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt),
+  sorter: (a, b) => {
+    const dateA = new Date(Date.UTC(...a.updatedAt));
+    const dateB = new Date(Date.UTC(...b.updatedAt));
+    return dateA - dateB;
+  },
 };
 
 function TasksTable({ tasksData, onTasksChange }) {
