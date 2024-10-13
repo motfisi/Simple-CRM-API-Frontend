@@ -15,42 +15,6 @@ import { tasksApi } from '@api';
 
 import './sass/index.scss';
 
-const tasksDataExample = [
-  {
-    key: 1,
-    id: 1,
-    user_name: 'Матвей',
-    user_id: 1,
-    title: 'Помыть пол',
-    description: 'Отмыть пол до блеска с моющим средство',
-    status: 'pending',
-    created_at: '12.12.2008',
-    updated_at: '12.12.2023',
-  },
-  {
-    key: 2,
-    id: 2,
-    user_name: 'Иван',
-    user_id: 2,
-    title: 'Починить выдвижной ящик',
-    description: 'Выдвижной ящик должен выезжать',
-    status: 'completed',
-    created_at: '01.03.2023',
-    updated_at: '01.08.2024',
-  },
-  {
-    key: 3,
-    id: 3,
-    user_name: 'Петя',
-    user_id: 3,
-    title: 'Закончить универ (опционально)',
-    description: 'Ну хотя бы до защиты диплома продержаться',
-    status: 'in_progress',
-    created_at: '06.12.2023',
-    updated_at: '01.09.2024',
-  },
-];
-
 const items = [
   {
     title: ROUTES.ROOT.TITLE,
@@ -68,17 +32,18 @@ function Tasks() {
 
   useEffect(() => {
     getTasks();
-  }, [tasksDataExample]);
+  }, []);
 
   const getTasks = async () => {
     try {
-      await tasksApi.getTasks().then((data) => {});
+      await tasksApi.getTasks().then((data) => {
+        setTasksData(data);
+      });
     } catch {
       message.error('Невозможно получить данные');
     } finally {
       setIsLoading(false);
     }
-    setTasksData(tasksDataExample);
   };
 
   const onAddTaskClick = () => {

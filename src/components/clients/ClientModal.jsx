@@ -41,11 +41,12 @@ function ClientModal({
         await clientsApi.addClient(body);
         message.success('Клиент успешно добавлен');
       } else if (type === MODAL_TYPE.EDIT) {
-        body.client_id = clientData.id;
+        body.id = clientData.id;
         await clientsApi.changeClient(body);
         message.success('Клиент успешно изменён');
       }
 
+      form.resetFields();
       onClientsChange();
       onOk();
     } catch {

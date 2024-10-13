@@ -1,10 +1,9 @@
 import { instance } from '.';
 
 export const clientsApi = {
-  getClients: () => instance.get(`/clients/getClients`).then((res) => res.data),
-  getClientById: (params) =>
-    instance.get(`/clients/getClientById`, { params }).then((res) => res.data),
-  addClient: (params) => instance.post(`/clients/addClient`, { params }),
-  changeClient: (params) => instance.post(`/clients/changeClient`, { params }),
-  deleteClient: (params) => instance.post(`/clients/deleteClient`, { params }),
+  getClients: () => instance.get(`/clients/getAll`).then((res) => res.data),
+  getClientById: (id) => instance.get(`/clients/${id}`).then((res) => res.data),
+  addClient: (body) => instance.post(`/clients/create`, body),
+  changeClient: (body) => instance.put(`/clients/update`, body),
+  deleteClient: (id) => instance.delete(`/clients/${id}`),
 };

@@ -19,21 +19,14 @@ const clientsPage = {
 
 function ClientInfo() {
   const [isLoading, setIsLoading] = useState(true);
+  const [clientData, setClientData] = useState(true);
   const { clientID } = useParams();
-
-  const clientData = {
-    key: 1,
-    name: 'тут должна',
-    email: 'быть информация',
-    phone: 'о клиенте по id',
-  };
 
   const getClient = async () => {
     try {
-      const body = {
-        client_id: clientID,
-      };
-      await clientsApi.getClientById(body).then((data) => {});
+      await clientsApi
+        .getClientById(clientID)
+        .then((data) => setClientData(data));
       setIsLoading(false);
     } catch {
       message.error('Невозможно получить данные');

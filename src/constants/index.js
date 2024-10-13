@@ -40,16 +40,16 @@ export const STATUSES = [
   {
     label: 'В обработке',
     text: 'В обработке',
-    value: 'pending',
+    value: 'PENDING',
   },
   {
     label: 'Выполняется',
     text: 'Выполняется',
-    value: 'in_progress',
+    value: 'IN_PROGRESS',
   },
   {
     label: 'Завершена',
     text: 'Завершена',
-    value: 'completed',
+    value: 'COMPLETED',
   },
 ];

@@ -6,14 +6,15 @@ import { getStatus } from '@utils';
 import { useNavigate } from 'react-router-dom';
 import TaskModal from '@src/components/tasks/TaskModal';
 import { tasksApi } from '@api';
+import { changeDateFormat } from '@utils';
 
 const client_column = {
   title: 'Клиент',
-  key: 'user_name',
-  dataIndex: 'user_name',
+  key: 'clientName',
+  dataIndex: 'clientName',
   sorter: (a, b) => {
-    const firstName = a.user_name;
-    const secondName = b.user_name;
+    const firstName = a.clientName;
+    const secondName = b.clientName;
 
     return firstName.localeCompare(secondName);
   },
@@ -50,20 +51,18 @@ const status_column = {
 
 const created_column = {
   title: 'Создан',
-  key: 'created_at',
-  dataIndex: 'created_at',
-  sorter: (a, b) =>
-    Date.parse(a.created_at.split('.').reverse().join('-')) -
-    Date.parse(b.created_at.split('.').reverse().join('-')),
+  key: 'createdAt',
+  dataIndex: 'createdAt',
+  render: (date) => changeDateFormat(date),
+  sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
 };
 
 const updated_column = {
   title: 'Обновлён',
-  key: 'updated_at',
-  dataIndex: 'updated_at',
-  sorter: (a, b) =>
-    Date.parse(a.created_at.split('.').reverse().join('-')) -
-    Date.parse(b.created_at.split('.').reverse().join('-')),
+  key: 'updatedAt',
+  dataIndex: 'updatedAt',
+  render: (date) => changeDateFormat(date),
+  sorter: (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt),
 };
 
 function TasksTable({ tasksData, onTasksChange }) {
@@ -82,16 +81,13 @@ function TasksTable({ tasksData, onTasksChange }) {
   };
 
   const deleteTask = async (id) => {
-    const body = {
-      task_id: id,
-    };
     try {
-      await tasksApi.deleteTask(body);
+      await tasksApi.deleteTask(id);
       message.success('Задача успешно удалена');
+      onTasksChange();
     } catch {
       message.error('Не удалось удалить задачу');
     }
-    onTasksChange();
   };
 
   const columns = [

@@ -5,6 +5,7 @@ import { TABLE_LOCALE, ROUTES, MODAL_TYPE } from '@constants';
 import { useNavigate } from 'react-router-dom';
 import ClientModal from '@src/components/clients/ClientModal';
 import { clientsApi } from '@api';
+import { changeDateFormat } from '@utils';
 
 const client_column = {
   title: 'Клиент',
@@ -32,20 +33,18 @@ const phone_column = {
 
 const created_column = {
   title: 'Создан',
-  key: 'created_at',
-  dataIndex: 'created_at',
-  sorter: (a, b) =>
-    Date.parse(a.created_at.split('.').reverse().join('-')) -
-    Date.parse(b.created_at.split('.').reverse().join('-')),
+  key: 'createdAt',
+  dataIndex: 'createdAt',
+  render: (date) => changeDateFormat(date),
+  sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
 };
 
 const updated_column = {
   title: 'Обновлён',
-  key: 'updated_at',
-  dataIndex: 'updated_at',
-  sorter: (a, b) =>
-    Date.parse(a.updated_at.split('.').reverse().join('-')) -
-    Date.parse(b.updated_at.split('.').reverse().join('-')),
+  key: 'updatedAt',
+  dataIndex: 'updatedAt',
+  render: (date) => changeDateFormat(date),
+  sorter: (a, b) => new Date(a.updatedAt) - new Date(b.updatedAt),
 };
 
 function ClientsTable({ clientsData, onClientsChange }) {
@@ -64,16 +63,14 @@ function ClientsTable({ clientsData, onClientsChange }) {
   };
 
   const deleteClient = async (id) => {
-    const body = {
-      client_id: id,
-    };
+    console.log(id);
     try {
-      await clientsApi.deleteClient(body);
+      await clientsApi.deleteClient(id);
       message.success('Клиент успешно удалён');
+      onClientsChange();
     } catch {
       message.error('Не удалось удалить клиента');
     }
-    onClientsChange();
   };
 
   const columns = [

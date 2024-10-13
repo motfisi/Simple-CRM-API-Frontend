@@ -11,7 +11,6 @@ import { tasksApi, clientsApi } from '@api';
 function TaskModal({ isOpen, onOk, onCancel, type, onTasksChange, taskData }) {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedClientID, setSelectedClientID] = useState();
   const [options, setOptions] = useState();
 
   useEffect(() => {
@@ -21,17 +20,21 @@ function TaskModal({ isOpen, onOk, onCancel, type, onTasksChange, taskData }) {
         form.setFieldsValue({
           task_title: taskData?.title,
           task_description: taskData?.description,
-          task_client: taskData?.user_id,
           task_status: taskData?.status,
         });
-        setSelectedClientID(taskData?.user_id);
       }
     }
   }, [isOpen, taskData]);
 
   const getClients = async () => {
     try {
-      await clientsApi.getClients().then((data) => {});
+      const clientsOptions = await clientsApi.getClients().then((data) => {
+        return data.map((client) => ({
+          value: client.id,
+          label: client.name,
+        }));
+      });
+      setOptions(clientsOptions);
     } catch {
       message.error('Невозможно получить клиентов');
     }
@@ -42,7 +45,7 @@ function TaskModal({ isOpen, onOk, onCancel, type, onTasksChange, taskData }) {
     const body = {
       title: form.getFieldValue('task_title'),
       description: form.getFieldValue('task_description'),
-      client_id: form.getFieldValue('task_client'),
+      clientId: form.getFieldValue('task_client'),
       status: form.getFieldValue('task_status'),
     };
 
@@ -51,11 +54,12 @@ function TaskModal({ isOpen, onOk, onCancel, type, onTasksChange, taskData }) {
         await tasksApi.addTask(body);
         message.success('Задача успешно добавлена');
       } else if (type === MODAL_TYPE.EDIT) {
-        body.task_id = taskData.id;
+        body.id = taskData.id;
         await tasksApi.changeTask(body);
         message.success('Задача успешно изменена');
       }
 
+      form.resetFields();
       onTasksChange();
       onOk();
     } catch {
@@ -89,7 +93,9 @@ function TaskModal({ isOpen, onOk, onCancel, type, onTasksChange, taskData }) {
       >
         <TaskTitleInput name='task_title' />
         <TaskDescriptionInput name='task_description' />
-        <TaskClientSelect name='task_client' options={options} />
+        {type === MODAL_TYPE.ADD ? (
+          <TaskClientSelect name='task_client' options={options} />
+        ) : null}
         <TaskStatusSelect name='task_status' />
         <Space>
           <FormItem>

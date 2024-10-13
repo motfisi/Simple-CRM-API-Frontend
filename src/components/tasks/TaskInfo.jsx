@@ -19,23 +19,12 @@ const clientsPage = {
 
 function ClientInfo() {
   const [isLoading, setIsLoading] = useState(true);
+  const [taskData, setTaskData] = useState(true);
   const { taskID } = useParams();
-
-  const taskData = {
-    id: 1,
-    user_name: 'о задаче по id',
-    user_id: 1,
-    title: 'тут должна',
-    description: 'быть информация',
-    status: 'pending',
-  };
 
   const getTask = async () => {
     try {
-      const body = {
-        task_id: taskID,
-      };
-      await tasksApi.getTaskById(body).then((data) => {});
+      await tasksApi.getTaskById(taskID).then((data) => setTaskData(data));
       setIsLoading(false);
     } catch {
       message.error('Невозможно получить данные');
@@ -74,7 +63,7 @@ function ClientInfo() {
           <Typography.Title level={4}>Описание:</Typography.Title>
           <Typography.Text>{taskData.description}</Typography.Text>
           <Typography.Title level={4}>Клиент:</Typography.Title>
-          <Typography.Text>{taskData.user_name}</Typography.Text>
+          <Typography.Text>{taskData.clientName}</Typography.Text>
           <Typography.Title level={4}>Статус:</Typography.Title>
           <Typography.Text>{getStatus(taskData.status)}</Typography.Text>
         </>
